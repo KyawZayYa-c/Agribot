@@ -1,0 +1,17 @@
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.deps.json
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.pdb
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Core.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Core.pdb
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.csproj.AssemblyReference.cache
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.AssemblyInfoInputs.cache
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.AssemblyInfo.cs
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotB.F7DC6512.Up2Date
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\refint\AgriBotBackend.Infrastructure.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.pdb
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\ref\AgriBotBackend.Infrastructure.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.runtimeconfig.json
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.genruntimeconfig.cache

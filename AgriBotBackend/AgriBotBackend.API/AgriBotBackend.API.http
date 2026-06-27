@@ -1,0 +1,6 @@
+@AgriBotBackend.API_HostAddress = http://localhost:5233
+
+GET {{AgriBotBackend.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,11 @@
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\bin\Debug\net10.0\AgriBotBackend.Core.deps.json
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\bin\Debug\net10.0\AgriBotBackend.Core.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\bin\Debug\net10.0\AgriBotBackend.Core.pdb
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\AgriBotBackend.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\AgriBotBackend.Core.AssemblyInfoInputs.cache
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\AgriBotBackend.Core.AssemblyInfo.cs
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\AgriBotBackend.Core.csproj.CoreCompileInputs.cache
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\AgriBotBackend.Core.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\refint\AgriBotBackend.Core.dll
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\AgriBotBackend.Core.pdb
+D:\Project Show\AgriBotBackend\AgriBotBackend.Core\obj\Debug\net10.0\ref\AgriBotBackend.Core.dll
