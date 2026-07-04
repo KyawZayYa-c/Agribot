@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project Show\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj": {}
+    "D:\\ProjectShow\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj": {}
   },
   "projects": {
-    "D:\\Project Show\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj": {
+    "D:\\ProjectShow\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project Show\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj",
+        "projectUniqueName": "D:\\ProjectShow\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj",
         "projectName": "AgriBotBackend.Core",
-        "projectPath": "D:\\Project Show\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj",
+        "projectPath": "D:\\ProjectShow\\AgriBotBackend\\AgriBotBackend.Core\\AgriBotBackend.Core.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\Project Show\\AgriBotBackend\\AgriBotBackend.Core\\obj\\",
+        "outputPath": "D:\\ProjectShow\\AgriBotBackend\\AgriBotBackend.Core\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

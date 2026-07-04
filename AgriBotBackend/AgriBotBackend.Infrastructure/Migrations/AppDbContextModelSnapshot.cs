@@ -91,6 +91,16 @@ namespace AgriBotBackend.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("CameraIp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CameraPort")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CameraStreamPath")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 

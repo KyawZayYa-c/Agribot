@@ -15,3 +15,22 @@ D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\A
 D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\ref\AgriBotBackend.Infrastructure.dll
 D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.runtimeconfig.json
 D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.genruntimeconfig.cache
+D:\Project Show\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.sourcelink.json
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.deps.json
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.runtimeconfig.json
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.dll
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Infrastructure.pdb
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Core.dll
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\bin\Debug\net10.0\AgriBotBackend.Core.pdb
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.csproj.AssemblyReference.cache
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.AssemblyInfoInputs.cache
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.AssemblyInfo.cs
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.csproj.CoreCompileInputs.cache
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.sourcelink.json
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotB.F7DC6512.Up2Date
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.dll
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\refint\AgriBotBackend.Infrastructure.dll
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.pdb
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\AgriBotBackend.Infrastructure.genruntimeconfig.cache
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.Infrastructure\obj\Debug\net10.0\ref\AgriBotBackend.Infrastructure.dll

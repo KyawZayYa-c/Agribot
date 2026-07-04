@@ -1,5 +1,4 @@
 namespace AgriBotBackend.Core.Models;
-
 public class Telemetry
 {
     public int Id { get; set; }

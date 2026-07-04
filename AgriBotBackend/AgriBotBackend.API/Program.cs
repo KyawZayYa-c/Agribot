@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using AgriBotBackend.Infrastructure.Data;
 using AgriBotBackend.API.Middlewares;
@@ -6,7 +7,9 @@ using AgriBotBackend.API.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Add services
+builder.Services.AddScoped<IAIChatService, AIChatService>();
+builder.Services.AddScoped<ISoilDetectionService, SoilDetectionService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -18,7 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // SignalR
 builder.Services.AddSignalR();
 
-// ✅ WebSocket Service - Singleton ပြန်ပြောင်းပါ
+// WebSocket Service
 builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
 
 // CORS
@@ -33,7 +36,26 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// ✅ Port - External Access အတွက်
+app.Urls.Clear();
+app.Urls.Add("http://0.0.0.0:5233");
+
+// Global Exception Handler
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        context.Response.StatusCode = 500;
+        context.Response.ContentType = "application/json";
+        await context.Response.WriteAsync(JsonSerializer.Serialize(new
+        {
+            error = "An unexpected error occurred",
+            timestamp = DateTime.Now
+        }));
+    });
+});
+
+// Configure pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -45,13 +67,7 @@ app.UseHttpsRedirection();
 app.UseWebSockets();
 app.UseMiddleware<WebSocketMiddleware>();
 app.MapControllers();
-
-// SignalR Hub
 app.MapHub<AgriBotHub>("/agribotHub");
-
-// Port
-app.Urls.Clear();
-app.Urls.Add("http://localhost:5233");
 
 Console.WriteLine("========================================");
 Console.WriteLine("🚀 AgriBot Server is running!");

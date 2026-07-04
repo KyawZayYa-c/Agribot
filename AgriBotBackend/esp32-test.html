@@ -263,30 +263,31 @@
         </div>
 
         <!-- ========================================== -->
-        <!-- VIDEO STREAM - NEW SECTION                  -->
-        <!-- ========================================== -->
-        <div class="video-container">
-            <div class="video-title">📹 Live Video Stream</div>
-            <div id="videoWrapper">
-                <img id="videoStream" 
-                     src="" 
-                     alt="Video Stream" 
-                     style="display:none;" />
-                <div class="video-placeholder" id="videoPlaceholder">
-                    <span class="icon">📷</span>
-                    <div>Waiting for ESP32 Camera...</div>
-                    <div style="font-size:0.8rem; margin-top:8px; color:#556677;">
-                        Make sure ESP32-CAM is connected and streaming
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top:10px;">
-                <button class="btn" id="toggleVideoBtn" style="background:#1a2a3a; color:#00d4ff; border:1px solid #00d4ff44;">
-                    🔄 Reload Stream
-                </button>
-                <span id="videoStatus" style="color:#445566; font-size:0.8rem; margin-left:10px;">⏳ Not loaded</span>
+<!-- VIDEO STREAM - NEW SECTION                  -->
+<!-- ========================================== -->
+<div class="video-container">
+    <div class="video-title">📹 Live Video Stream</div>
+    <div id="videoWrapper">
+        <!-- ✅ ပြင်ဆင်ပြီး - ESP32-CAM Stream URL -->
+        <img id="videoStream" 
+     src="http://10.53.54.30:81/stream" 
+     alt="Video Stream" 
+     style="display:none;" />
+        <div class="video-placeholder" id="videoPlaceholder">
+            <span class="icon">📷</span>
+            <div>Waiting for ESP32 Camera...</div>
+            <div style="font-size:0.8rem; margin-top:8px; color:#556677;">
+                Make sure ESP32-CAM is connected and streaming
             </div>
         </div>
+    </div>
+    <div style="margin-top:10px;">
+        <button class="btn" id="toggleVideoBtn" style="background:#1a2a3a; color:#00d4ff; border:1px solid #00d4ff44;">
+            🔄 Reload Stream
+        </button>
+        <span id="videoStatus" style="color:#445566; font-size:0.8rem; margin-left:10px;">⏳ Not loaded</span>
+    </div>
+</div>
 
         <!-- Telemetry Cards -->
         <div class="grid">
@@ -345,7 +346,7 @@
         // VIDEO CONFIGURATION
         // ==========================================
         // 🔧 ခင်ဗျားရဲ့ ESP32-CAM IP ကို ဒီမှာ ထည့်ပါ
-        const ESP32_CAM_IP = '192.168.1.100';  // ← ESP32-CAM ရဲ့ IP ကို ပြောင်းပါ
+        const ESP32_CAM_IP = '10.53.54.30';  // ← ESP32-CAM ရဲ့ IP ကို ပြောင်းပါ
         const VIDEO_URL = `http://${ESP32_CAM_IP}:81/stream`;
 
         // ==========================================

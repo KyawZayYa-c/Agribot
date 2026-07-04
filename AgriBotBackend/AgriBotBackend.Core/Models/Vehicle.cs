@@ -9,4 +9,8 @@ public class Vehicle
     public string Mode { get; set; } = "Manual";
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
+
+    public string? CameraIp { get; set; } 
+    public int CameraPort { get; set; } = 81;  
+    public string CameraStreamPath { get; set; } = "/stream";  
 }

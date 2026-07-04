@@ -15,6 +15,7 @@ public class WebSocketService : IWebSocketService
     private WebSocket? _webSocket;
     private bool _isConnected = false;
     private string? _vehicleId = null;
+    private string? _esp32Ip = null; 
     private readonly ILogger<WebSocketService> _logger;
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IHubContext<AgriBotHub> _hubContext;
@@ -43,8 +44,15 @@ public class WebSocketService : IWebSocketService
                 _webSocket = await context.WebSockets.AcceptWebSocketAsync();
                 _isConnected = true;
 
+                // ✅ ESP32 IP ကို သိမ်းပါ
+                _esp32Ip = context.Connection.RemoteIpAddress?.ToString();
+                if (_esp32Ip != null && _esp32Ip.StartsWith("::ffff:"))
+                {
+                    _esp32Ip = _esp32Ip.Substring(7);
+                }
+
                 _logger.LogInformation("✅ WebSocket connection established!");
-                Console.WriteLine("✅ WebSocket connection established!");
+                Console.WriteLine($"✅ WebSocket connection established! ESP32 IP: {_esp32Ip}");
 
                 await ReceiveMessagesAsync();
             }
@@ -60,7 +68,6 @@ public class WebSocketService : IWebSocketService
             Console.WriteLine("❌ Not a WebSocket request");
         }
     }
-
     private async Task ReceiveMessagesAsync()
     {
         var buffer = new byte[1024 * 4];
@@ -154,33 +161,44 @@ public class WebSocketService : IWebSocketService
 
             switch (type)
             {
-                case "register":
-                    _vehicleId = jsonDoc.RootElement.GetProperty("vehicleId").GetString();
-                    Console.WriteLine($"🚗 Vehicle registered: {_vehicleId}");
-                    
-                    // Vehicle ကို Database မှာ သိမ်းပါ (Vehicle အတွက်တော့ သိမ်းထားသင့်တယ်)
-                    await ExecuteWithDbContextAsync(async dbContext =>
-                    {
-                        var existingVehicle = await dbContext.Vehicles
-                            .FirstOrDefaultAsync(v => v.VehicleId == _vehicleId);
-                        
-                        if (existingVehicle == null)
-                        {
-                            var vehicle = new Vehicle
-                            {
-                                VehicleId = _vehicleId,
-                                Name = $"AgriBot-{_vehicleId}",
-                                Status = "Online",
-                                Mode = "Manual",
-                                CreatedAt = DateTime.Now,
-                                UpdatedAt = DateTime.Now
-                            };
-                            await dbContext.Vehicles.AddAsync(vehicle);
-                            await dbContext.SaveChangesAsync();
-                        }
-                    });
-                    break;
-
+               
+case "register":
+    _vehicleId = jsonDoc.RootElement.GetProperty("vehicleId").GetString();
+    Console.WriteLine($"🚗 Vehicle registered: {_vehicleId}");
+    
+    // ✅ _esp32Ip ကို သုံးပါ (context အစား)
+    var esp32Ip = _esp32Ip ?? "10.53.54.30";
+    
+    await ExecuteWithDbContextAsync(async dbContext =>
+    {
+        var existingVehicle = await dbContext.Vehicles
+            .FirstOrDefaultAsync(v => v.VehicleId == _vehicleId);
+        
+        if (existingVehicle == null)
+        {
+            var vehicle = new Vehicle
+            {
+                VehicleId = _vehicleId,
+                Name = $"AgriBot-{_vehicleId}",
+                Status = "Online",
+                Mode = "Manual",
+                CameraIp = esp32Ip,
+                CameraPort = 81,
+                CameraStreamPath = "/stream",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+            await dbContext.Vehicles.AddAsync(vehicle);
+            await dbContext.SaveChangesAsync();
+        }
+        else
+        {
+            existingVehicle.CameraIp = esp32Ip;
+            existingVehicle.UpdatedAt = DateTime.Now;
+            await dbContext.SaveChangesAsync();
+        }
+    });
+    break;
                 case "telemetry":
                     var battery = jsonDoc.RootElement.GetProperty("battery").GetInt32();
                     var seedLevel = jsonDoc.RootElement.GetProperty("seedLevel").GetInt32();
