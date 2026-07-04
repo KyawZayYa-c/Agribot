@@ -310,3 +310,4 @@ D:\ProjectShow\AgriBotBackend\AgriBotBackend.API\obj\Debug\net10.0\refint\AgriBo
 D:\ProjectShow\AgriBotBackend\AgriBotBackend.API\obj\Debug\net10.0\AgriBotBackend.API.pdb
 D:\ProjectShow\AgriBotBackend\AgriBotBackend.API\obj\Debug\net10.0\AgriBotBackend.API.genruntimeconfig.cache
 D:\ProjectShow\AgriBotBackend\AgriBotBackend.API\obj\Debug\net10.0\ref\AgriBotBackend.API.dll
+D:\ProjectShow\AgriBotBackend\AgriBotBackend.API\bin\Debug\net10.0\AgriBotBackend.API.staticwebassets.runtime.json

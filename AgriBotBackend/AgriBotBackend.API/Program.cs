@@ -23,7 +23,7 @@ builder.Services.AddSignalR();
 
 // WebSocket Service
 builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
-
+builder.Services.AddScoped<IPhotoStorageService, PhotoStorageService>();
 // CORS
 builder.Services.AddCors(options =>
 {
