@@ -1,7 +1,7 @@
 // hooks/useCamera.js
 import { useState, useEffect, useRef } from 'react';
 import { Platform } from 'react-native';
-import { sendCameraCommand } from '../services/apiService';
+import { sendCameraCommand, getConnectionStatus } from '../services/apiService';
 
 export const useCamera = (esp32Ip = '10.53.54.30') => {
   const [isVideoLoading, setIsVideoLoading] = useState(true);
@@ -12,42 +12,18 @@ export const useCamera = (esp32Ip = '10.53.54.30') => {
   const videoStreamUrl = `http://${esp32Ip}:81/stream`;
   const checkIntervalRef = useRef(null);
 
-  // ✅ API URL ကို platform ပေါ်မူတည်ပြီး သတ်မှတ်ပါ
-  const getApiUrl = () => {
-    if (Platform.OS === 'android') {
-      // Android Emulator အတွက်
-      return 'http://10.0.2.2:5233/api/status/connection';
-    } else if (Platform.OS === 'ios') {
-      // iOS Simulator အတွက်
-      return 'http://localhost:5233/api/status/connection';
-    } else {
-      // Real device အတွက်
-      return 'http://10.53.54.172:5233/api/status/connection';
-    }
-  };
+  // ✅ API_URL ကို မှန်ကန်အောင်သတ်မှတ်ပါ
+  const API_URL = 'http://10.53.54.172:5233/api/status/connection';
 
   const checkConnectionAndLoadVideo = async () => {
     try {
       setIsVideoLoading(true);
       setVideoError(false);
       
-      const apiUrl = getApiUrl();
-      console.log('🔍 Checking connection at:', apiUrl);
+      console.log('🔍 Checking connection at:', API_URL);
       
-      const response = await fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        // ✅ Timeout သတ်မှတ်ပါ
-        signal: AbortSignal.timeout(5000),
-      });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
+      // ✅ getConnectionStatus ကိုသုံးပါ
+      const data = await getConnectionStatus();
       console.log('📡 Connection response:', data);
       
       if (data.isConnected) {
@@ -69,20 +45,19 @@ export const useCamera = (esp32Ip = '10.53.54.30') => {
     }
   };
 
-  const handleCameraCommand = (direction) => {
-    console.log(`📷 Sending camera command: ${direction}`);
-    sendCameraCommand(direction, 'esp32-test-001')
-      .then(result => {
-        if (result.success) {
-          console.log(`✅ Camera ${direction} command sent!`);
-        } else {
-          console.log(`❌ Camera ${direction} failed:`, result.error);
-        }
-      })
-      .catch(error => {
-        console.error('❌ Error sending command:', error);
-      });
-  };
+  const handleCameraCommand = async (direction) => {
+  console.log(`📷 Sending camera command: ${direction}`);
+  try {
+    const result = await sendCameraCommand(direction, 'esp32-test-001');
+    if (result && !result.error) {
+      console.log(`✅ Camera ${direction} command sent!`);
+    } else {
+      console.log(`❌ Camera ${direction} failed:`, result?.error || 'Unknown error');
+    }
+  } catch (error) {
+    console.error('❌ Error sending command:', error);
+  }
+};
 
   const reloadVideo = () => {
     console.log('🔄 Reloading video...');
@@ -95,17 +70,13 @@ export const useCamera = (esp32Ip = '10.53.54.30') => {
     setIsVideoVisible(prev => !prev);
   };
 
-  // ✅ Auto reconnect every 30 seconds
   useEffect(() => {
-    // Initial check
     checkConnectionAndLoadVideo();
 
-    // Set up interval for periodic checks
     checkIntervalRef.current = setInterval(() => {
       checkConnectionAndLoadVideo();
     }, 30000);
 
-    // Cleanup
     return () => {
       if (checkIntervalRef.current) {
         clearInterval(checkIntervalRef.current);

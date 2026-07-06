@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Controller Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 700px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #1a202c;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .subtitle {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 16px;
+        }
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #edf2f7;
+            padding: 10px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .dot.green { background: #48bb78; }
+        .dot.red { background: #fc8181; }
+        .dot.yellow { background: #ecc94b; }
+        
+        .url-display {
+            background: #2d3748;
+            color: #a0aec0;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            word-break: break-all;
+            margin-bottom: 20px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .input-group input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            border-color: #4299e1;
+        }
+        .input-group button {
+            padding: 12px 24px;
+            background: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .input-group button:hover {
+            background: #3182ce;
+        }
+        .input-group button:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+        
+        .feature-select {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        .feature-btn {
+            padding: 6px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .feature-btn:hover {
+            border-color: #4299e1;
+        }
+        .feature-btn.active {
+            border-color: #4299e1;
+            background: #ebf8ff;
+            color: #2b6cb0;
+        }
+        
+        .response-box {
+            background: #f7fafc;
+            border-radius: 10px;
+            padding: 16px;
+            min-height: 150px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 2px solid #e2e8f0;
+            margin-top: 16px;
+            font-size: 15px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .response-box.loading {
+            color: #718096;
+            font-style: italic;
+        }
+        .response-box.error {
+            color: #e53e3e;
+        }
+        .response-box .markdown h1, 
+        .response-box .markdown h2, 
+        .response-box .markdown h3 {
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+        .response-box .markdown ul {
+            padding-left: 20px;
+            margin: 6px 0;
+        }
+        
+        .clear-btn {
+            background: none;
+            border: none;
+            color: #718096;
+            cursor: pointer;
+            font-size: 13px;
+            padding: 4px 8px;
+        }
+        .clear-btn:hover {
+            color: #e53e3e;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #a0aec0;
+            text-align: center;
+        }
+        
+        .health-check-btn {
+            background: #48bb78;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        .health-check-btn:hover {
+            background: #38a169;
+        }
+        .health-check-btn:disabled {
+            background: #a0aec0;
+            cursor: not-allowed;
+        }
+        
+        .health-result {
+            font-size: 13px;
+            margin-top: 4px;
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI Chat Controller Test</h1>
+        <div class="subtitle">Testing AgriBotBackend.API.Controllers.AIChatController</div>
+        
+        <div class="status-bar">
+            <div class="status-badge">
+                <span class="dot green" id="statusDot"></span>
+                <span id="statusText">Ready</span>
+            </div>
+            <div>
+                <button class="health-check-btn" id="healthBtn" onclick="checkHealth()">🩺 Health Check</button>
+            </div>
+        </div>
+        <div id="healthResult" class="health-result"></div>
+        
+        <div class="url-display" id="baseUrlDisplay">🌐 Base: http://localhost:5233/api/aichat</div>
+        
+        <div class="feature-select" id="featureContainer">
+            <span style="font-size:13px; color:#718096; margin-right:6px;">Feature:</span>
+            <button class="feature-btn active" data-feature="general">❓ General</button>
+            <button class="feature-btn" data-feature="disease">🦠 Disease</button>
+            <button class="feature-btn" data-feature="fertilizer">🌱 Fertilizer</button>
+            <button class="feature-btn" data-feature="crop">🌾 Crop</button>
+            <button class="feature-btn" data-feature="pest">🐛 Pest</button>
+        </div>
+        
+        <div class="input-group">
+            <input type="text" id="messageInput" placeholder="ဒီမှာ မေးခွန်းရိုက်ထည့်ပါ..." />
+            <button id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+        
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:14px; font-weight:600; color:#2d3748;">Response</span>
+            <button class="clear-btn" onclick="clearResponse()">Clear</button>
+        </div>
+        <div class="response-box" id="responseBox">💡 မေးခွန်းတစ်ခုခုကို ရိုက်ထည့်ပြီး Send နှိပ်ပါ။</div>
+        
+        <div class="footer">
+            ⚡ C# Backend · AIChatController · Render Proxy Ready
+        </div>
+    </div>
+    
+    <script>
+        // ============================================
+        // CONFIGURATION - မင်း API URL ကို ပြင်ပါ
+        // ============================================
+        const API_BASE_URL = 'http://localhost:5233/api/aichat';
+        // const API_BASE_URL = 'https://your-csharp-backend.onrender.com/api/aichat';
+        
+        let currentFeature = 'general';
+        let isSending = false;
+        
+        // ============================================
+        // DOM References
+        // ============================================
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const responseBox = document.getElementById('responseBox');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const healthResult = document.getElementById('healthResult');
+        const baseUrlDisplay = document.getElementById('baseUrlDisplay');
+        
+        // Show base URL
+        baseUrlDisplay.textContent = `🌐 Base: ${API_BASE_URL}`;
+        
+        // ============================================
+        // Feature Buttons
+        // ============================================
+        document.querySelectorAll('.feature-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.feature-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFeature = this.dataset.feature;
+            });
+        });
+        
+        // ============================================
+        // Enter key support
+        // ============================================
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // ============================================
+        // HEALTH CHECK
+        // ============================================
+        async function checkHealth() {
+            const btn = document.getElementById('healthBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Checking...';
+            healthResult.textContent = '⏳ စစ်ဆေးနေပါပြီ...';
+            
+            setStatus('yellow', 'Checking health...');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/health`);
+                const data = await response.json();
+                
+                if (response.ok) {
+                    healthResult.innerHTML = `✅ <strong>Health OK</strong> · ${data.timestamp || ''}`;
+                    setStatus('green', 'Server ready');
+                    responseBox.textContent = '✅ Health check passed! Server is awake.';
+                    responseBox.className = 'response-box';
+                } else {
+                    healthResult.innerHTML = `❌ Health check failed: ${response.status}`;
+                    setStatus('red', 'Error');
+                    responseBox.textContent = `❌ Health check failed: ${response.status}\n${JSON.stringify(data, null, 2)}`;
+                    responseBox.className = 'response-box error';
+                }
+            } catch (error) {
+                healthResult.innerHTML = `❌ Cannot connect: ${error.message}`;
+                setStatus('red', 'Offline');
+                responseBox.textContent = `❌ Cannot connect to server: ${error.message}\n\nMake sure your C# backend is running on ${API_BASE_URL}`;
+                responseBox.className = 'response-box error';
+            }
+            
+            btn.disabled = false;
+            btn.textContent = '🩺 Health Check';
+        }
+        
+        // ============================================
+        // SEND MESSAGE
+        // ============================================
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) {
+                responseBox.textContent = '⚠️ ကျေးဇူးပြု၍ မေးခွန်းတစ်ခုခု ရိုက်ထည့်ပါ။';
+                responseBox.className = 'response-box error';
+                return;
+            }
+            
+            if (isSending) return;
+            isSending = true;
+            sendBtn.disabled = true;
+            sendBtn.textContent = '⏳ Sending...';
+            
+            setStatus('yellow', 'Processing...');
+            responseBox.textContent = '⏳ AI က တွေးနေပါပြီ...';
+            responseBox.className = 'response-box loading';
+            
+            const payload = {
+                message: message,
+                feature: currentFeature
+            };
+            
+            const startTime = Date.now();
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/message`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+                
+                if (response.ok && data.reply) {
+                    const formattedReply = formatReply(data.reply);
+                    responseBox.innerHTML = formattedReply;
+                    responseBox.className = 'response-box';
+                    setStatus('green', `Done (${elapsed}s)`);
+                } else {
+                    responseBox.textContent = `❌ Error: ${data.error || data.reply || 'Unknown error'}`;
+                    responseBox.className = 'response-box error';
+                    setStatus('red', 'Error');
+                }
+            } catch (error) {
+                responseBox.textContent = `❌ Network error: ${error.message}\n\nMake sure your C# backend is running on ${API_BASE_URL}`;
+                responseBox.className = 'response-box error';
+                setStatus('red', 'Offline');
+            }
+            
+            isSending = false;
+            sendBtn.disabled = false;
+            sendBtn.textContent = 'Send';
+        }
+        
+        // ============================================
+        // HELPERS
+        // ============================================
+        function setStatus(color, text) {
+            statusDot.className = `dot ${color}`;
+            statusText.textContent = text;
+        }
+        
+        function clearResponse() {
+            responseBox.textContent = '💡 မေးခွန်းတစ်ခုခုကို ရိုက်ထည့်ပြီး Send နှိပ်ပါ။';
+            responseBox.className = 'response-box';
+        }
+        
+        function formatReply(text) {
+            if (!text) return 'Empty response';
+            
+            // Convert Markdown-like to HTML
+            let html = text
+                // Headings
+                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                // Bold
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                // Italic
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                // Bullet points
+                .replace(/^\- (.*$)/gim, '• $1')
+                .replace(/^\* (.*$)/gim, '• $1')
+                // Line breaks
+                .replace(/\n/g, '<br>');
+            
+            return `<div class="markdown">${html}</div>`;
+        }
+        
+        // ============================================
+        // Auto health check on load
+        // ============================================
+        window.addEventListener('load', function() {
+            setTimeout(checkHealth, 500);
+        });
+    </script>
+</body>
+</html>

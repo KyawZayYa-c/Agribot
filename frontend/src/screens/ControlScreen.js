@@ -18,6 +18,7 @@ import CameraControlTab from '../components/control/CameraControlTab';
 import OtherStatusControls from '../components/control/OtherStatusControls';
 import BottomMetricsBar from '../components/control/BottomMetricsBar';
 import GlassCard from '../components/common/GlassCard';
+import { sendCommand } from '../services/apiService';
 
 // Hooks
 import { useControlState } from '../hooks/useControlState';
@@ -80,12 +81,22 @@ const ControlScreen = ({ onBack }) => {
     );
   }
 
-  const handleCarDirection = (direction) => {
+  const handleCarDirection = async(direction) => {
     console.log(`Car moving: ${direction}`);
+    try {
+      await sendCommand(direction, '50'); 
+    } catch (error) {
+      console.log(`❌ Car move to backend failed:`, error);
+    }
   };
 
-  const handleEmergencyStop = () => {
+  const handleEmergencyStop = async () => {
     console.log('Emergency Stop!');
+    try {
+      await sendCommand('stop', '0');
+    } catch (error) {
+      console.log(`❌ Emergency stop failed:`, error);
+    }
   };
 
   return (

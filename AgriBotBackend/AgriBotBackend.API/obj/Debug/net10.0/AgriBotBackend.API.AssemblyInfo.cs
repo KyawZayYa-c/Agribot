@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AgriBotBackend.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7da33c24b07497e27a0d4419db84f3c86e7b55b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4c65a5cbb5e98184daa27f2cf0e189990a467c3")]
 [assembly: System.Reflection.AssemblyProductAttribute("AgriBotBackend.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AgriBotBackend.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

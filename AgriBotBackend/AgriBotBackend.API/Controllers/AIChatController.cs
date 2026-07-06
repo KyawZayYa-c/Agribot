@@ -56,4 +56,25 @@ public class AIChatController : ControllerBase
 
         return Ok(features);
     }
+
+    // ✅ GET: api/aichat/health
+    [HttpGet("health")]
+    public async Task<IActionResult> HealthCheck()
+    {
+        try
+        {
+            _logger.LogInformation("Health check called - waking up server if needed");
+            
+            return Ok(new { 
+                status = "ok", 
+                timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"),
+                message = "Server is awake and ready"
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Health check failed");
+            return StatusCode(500, new { status = "error", message = "Health check failed" });
+        }
+    }
 }
